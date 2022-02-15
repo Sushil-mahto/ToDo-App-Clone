@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct ToDoApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+    @AppStorage("c1")var c1 = false
+    init(){
+           FirebaseApp.configure()
+       }
+       var body: some Scene {
+           WindowGroup {
+               ContentView().environment(\.colorScheme, c1 ? .dark:.light)
+                   .environmentObject(MyViewModel())
+           }
+       }
 }
